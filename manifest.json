@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "Review Auto Decline",
+  "version": "2.1",
+  "description": "Declines journal peer-review invitations in Outlook Web and deletes them, plus the registration and decline-confirmation emails.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlg/TgyYA+iUS4Cm3Lf7aUkcLhg2AJtvfLvtO3Rk/yaB0xQnf4FNSWoOu15RfGowJuHh8JrNkZ7DEzK7H0hgyTETOTTucATvJFfxmRTr24tLESa+lT9gJY+kMbkSd2FYVNtOOS7HBmLUQjeDQNxGg5J0BsCqILuyRgWkMXvyQ61KD69hzEKrQRbV8l5Zzdr6DV0PJAWINXRxq4HQtCyQFDviQC/4t6ewYk1hWFtSSG1wetIKV5Gx7lCU90lFvEnH7OgSIeYzoE9FK0i5OzezyA5XRaXfJg2TBOV6is9qqVe4lzOGKJI4Lr2JZbds/N9ertSdzSJbZbBJQC8iUfxinKQIDAQAB",
+  "permissions": [
+    "storage",
+    "scripting",
+    "webNavigation",
+    "nativeMessaging"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "options_page": "options.html",
+  "action": {
+    "default_title": "Review Auto Decline"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://outlook.cloud.microsoft/*",
+        "https://outlook.office.com/*",
+        "https://outlook.office365.com/*"
+      ],
+      "js": [
+        "outlook.js"
+      ]
+    }
+  ]
+}

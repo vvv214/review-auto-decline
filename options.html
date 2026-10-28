@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Review Auto Decline</title>
+  <style>
+    body { font: 14px/1.5 -apple-system, BlinkMacSystemFont, sans-serif; max-width: 900px; margin: 24px auto; padding: 0 16px; color: #222; }
+    label { display: block; margin: 14px 0 4px; font-weight: 600; }
+    input, select { width: 100%; box-sizing: border-box; padding: 6px 8px; font: inherit; }
+    .hint { color: #666; font-size: 12px; }
+    button { margin-top: 14px; padding: 6px 16px; font: inherit; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+    td, th { text-align: left; padding: 4px 6px; border-bottom: 1px solid #eee; vertical-align: top; }
+    th { color: #666; font-weight: 600; }
+    #saved, #tested { margin-left: 8px; }
+    #saved, .pass { color: #2e7d32; }
+    .fail { color: #c62828; }
+  </style>
+</head>
+<body>
+  <h1>Review Auto Decline</h1>
+
+  <label for="llm">LLM for emails and pages the built-in rules don't recognize</label>
+  <select id="llm">
+    <option value="codex">Codex (local codex exec; needs host/install.sh)</option>
+    <option value="anthropic">Anthropic API</option>
+    <option value="off">Off (Editorial Manager and ScholarOne rules only)</option>
+  </select>
+
+  <label for="codexModel">Codex model</label>
+  <input id="codexModel" placeholder="gpt-6.1-sol">
+
+  <label for="apiKey">Anthropic API key</label>
+  <input id="apiKey" type="password" autocomplete="off" placeholder="sk-ant-...">
+
+  <label for="model">Claude model</label>
+  <select id="model">
+    <option value="claude-opus-5-5">Claude Opus 5.5</option>
+    <option value="claude-sonnet-5-5">Claude Sonnet 5.5</option>
+    <option value="claude-haiku-5-5">Claude Haiku 5.5 (cheapest)</option>
+  </select>
+
+  <label for="myAddresses">Other names or addresses invitations may be sent to</label>
+  <input id="myAddresses" placeholder="jdoe@example.edu, jd4x@example.edu">
+  <div class="hint">Comma-separated. Your Outlook display name is always used. Invitations whose To line doesn't include you (for example copies you are cc'd on as an editor) are never declined.</div>
+
+  <button id="save">Save</button><span id="saved"></span>
+  <button id="test">Test LLM</button><span id="tested"></span>
+  <div class="hint">Test LLM asks the saved LLM about a sample IEEE Access invitation and shows what it answered and how long it took.</div>
+
+  <h2>Recent actions</h2>
+  <table>
+    <thead><tr><th>Time</th><th>Action</th><th>Email</th><th>Details</th></tr></thead>
+    <tbody id="log"></tbody>
+  </table>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>
